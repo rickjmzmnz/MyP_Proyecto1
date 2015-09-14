@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package proyecto1;
-
+import jfx.messagebox.MessageBox;
 /**
  *
  * @author ricardo
@@ -21,10 +21,17 @@ public class Evaluador {
         this.token = token;
     }
     
-    public double eval(double numero) {
+    public double[][] eval(double numero1,double numero2) {
+         double[][] arregloDoble = new double[1000][2];
          ArbolAnalizador arbol = this.token.getTree();
-         ArbolAnalizador.Nodo nodo = arbol.getRaiz();    
-         return ayudaEval(nodo,numero);
+         ArbolAnalizador.Nodo nodo = arbol.getRaiz(); 
+         double intervalo = (numero2 - numero1)/1000;
+         for(int i = 0;i<1000;i++) {
+             arregloDoble[i][0] = numero1;
+             arregloDoble[i][1] = ayudaEval(nodo, numero1);
+             numero1 += intervalo;
+         }         
+         return arregloDoble; 
     }
     
     private double ayudaEval(ArbolAnalizador.Nodo nodo,double numero) {        
@@ -70,9 +77,10 @@ public class Evaluador {
                 double div1 = ayudaEval(nodo.getIzq(), numero);
                 double div2 = ayudaEval(nodo.getDer(), numero);
                 if(div2 == 0) {
-                    //error
-                } 
+                MessageBox.show(null, "División entre cero, (te vas a ir al infierno)", "División inválida", MessageBox.ICON_ERROR | MessageBox.OK);
+                } else {                    
                 return (div1 / div2);
+                }
             case "^" :
                 double pot1 = ayudaEval(nodo.getIzq(), numero);
                 double pot2 = ayudaEval(nodo.getDer(), numero);

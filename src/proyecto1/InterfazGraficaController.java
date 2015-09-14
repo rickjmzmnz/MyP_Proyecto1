@@ -20,10 +20,14 @@ public class InterfazGraficaController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        String p = "(+ 1 2.123456789.09876)";
+        String p = "(^ x 2)";
         Tokenizer token = new Tokenizer(p);
         Evaluador eval = new Evaluador(token);
-        System.out.println(eval.eval(3.14/2));
+        double[][] arreglo = eval.eval(0,100);
+        for(int i=0;i<1000;i++) {
+            System.out.println("x = "+arreglo[i][0] +" "+"y = "+arreglo[i][1]);
+        }
+        
     }    
     
     
