@@ -1,26 +1,40 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proyecto1;
 import jfx.messagebox.MessageBox;
+
 /**
- *
- * @author ricardo
+ * Clase para evaluar el árbol con la cadena
+ * Ya partida en tokens
+ * @author Ricardo Jiménez Méndez
  */
 public class Evaluador {
     
+    //token con los caracteres
     private Tokenizer token;
     
+    /**
+     * Constructor vacío de la clase Evaluador
+     */
     public Evaluador() {
         this.token = new Tokenizer();
     }
     
+    /**
+     * Constructor de la clase Evaluador
+     * @param token - token con caracteres
+     */
     public Evaluador(Tokenizer token) {
         this.token = token;
     }
     
+    /**
+     * Método que obtiene todos los valores que querramos evaluar
+     * A partir de un intervalo dado
+     * Regresamos todos los valores que se encuentren dentro del intervalo
+     * @param numero1 - inicio del intervalo
+     * @param numero2 - fin del intervalo
+     * @return el arreglo con todos los valores evaluados
+     */
     public double[][] eval(double numero1,double numero2) {
          double[][] arregloDoble = new double[1000][2];
          ArbolAnalizador arbol = this.token.getTree();
@@ -34,6 +48,14 @@ public class Evaluador {
          return arregloDoble; 
     }
     
+    /**
+     * Método auxiliar para obetern el valor de los tokens
+     * Evaluamos de acuerdo al token que sea
+     * Y regresamos el valor de las operaciones
+     * @param nodo - nodo con el caracter a evaluar
+     * @param numero - número a evaluar
+     * @return el valor de los tokens
+     */
     private double ayudaEval(ArbolAnalizador.Nodo nodo,double numero) {        
         switch(nodo.getToken()) {
             case "x" :
@@ -77,7 +99,7 @@ public class Evaluador {
                 double div1 = ayudaEval(nodo.getIzq(), numero);
                 double div2 = ayudaEval(nodo.getDer(), numero);
                 if(div2 == 0) {
-                MessageBox.show(null, "División entre cero, (te vas a ir al infierno)", "División inválida", MessageBox.ICON_ERROR | MessageBox.OK);
+                return MessageBox.show(null, "División entre cero, (te vas a ir al infierno)", "División inválida", MessageBox.ICON_ERROR | MessageBox.OK);
                 } else {                    
                 return (div1 / div2);
                 }
@@ -88,10 +110,9 @@ public class Evaluador {
             default :               
                 if(Numero.numero(nodo.getToken())) {
                 return Double.parseDouble(nodo.getToken());
-        }else{//mandar error
-                
+                }else{
+                return MessageBox.show(null, "Tu número no es correcto.", "Número inválida", MessageBox.ICON_ERROR | MessageBox.OK);
                 }
-        }
-    return numero;
+        }    
     }
 }

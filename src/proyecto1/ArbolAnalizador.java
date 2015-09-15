@@ -1,28 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proyecto1;
 
 /**
- *
- * @author ricardo
+ * Clase para crear un árbol
+ * Con el proposito de guardar la cadena de entrada
+ * Para despues evaluarla
+ * @author Ricardo Jiménez Méndez
  */
 public class ArbolAnalizador {
 
+    //Nodo raíz del árbol
     private Nodo raiz;
 
     protected class Nodo {
-
+        
+        //Nodo izquierdo
         private Nodo izq;
+        //Nodo derecho
         private Nodo der;
+        //Nodo padre
         private Nodo padre;
+        //Token con la cadena
         private String token;
 
         /**
-        * Constructor de la clase Nodo
-        */
+         * Constructor vacío de la clase Nodo
+         */
         public Nodo() {
             this.izq = null;
             this.der = null;
@@ -31,9 +34,9 @@ public class ArbolAnalizador {
         }
 
         /**
-        * Constructor de la clase Nodo
-        * @param token - cadena de entrada
-        */
+         * Constructor de la clase Nodo
+         * @param token - cadena de entrada
+         */
         public Nodo(String token) {
             this.izq = null;
             this.der = null;
@@ -42,9 +45,10 @@ public class ArbolAnalizador {
         }
         
         /**
-        * Método para obtener
-        * El valor del nodo izquierdo
-        */
+         * Método para obtener
+         * El valor del nodo izquierdo
+         * @return el valor del nodo izquierdo
+         */
         public Nodo getIzq() {
             return this.izq;
         }
@@ -52,68 +56,90 @@ public class ArbolAnalizador {
         /**
          * Método para darle
          * Un valor al nodo izquierdo
-         * @param izq - nodo izquierdo 
+         * @param izq - nodo izquierdo
          */
         public void setIzq(Nodo izq) {
             this.izq = izq;
         }
         
-        /*
-        * Método para obtener
-        * El valor del nodo derecho
-        */
+        /**
+         * Método para obtener
+         * El valor del nodo derecho
+         * @return el valor del nodo derecho
+         */
         public Nodo getDer() {
             return this.der;
         }
         
-        /*
-        * Método para darle
-        * Un valor al nodo derecho
-        * @param der 
-        */
+        /**
+         * Método para darle
+         * Un valor al nodo derecho
+         * @param der - nodo derecho
+         */
         public void setDer(Nodo der) {
             this.der = der;
         }
 
-        /*
-        * Método para obtener
-        * El valor del nodo padre
-        */
+        /**
+         * Método para obtener
+         * El valor del nodo padre
+         * @return el valor del padre
+         */
         public Nodo getPadre() {
             return this.padre;
         }
 
-        /*
-        * Método para darle
-        * Un valor al nodo padre
-        */
+        /**
+         * Método para darle
+         * Un valor al nodo padre
+         * @param padre - nodo padre
+         */
         public void setPadre(Nodo padre) {
             this.padre = padre;
         }
-
+        
+        /**
+         * Método para obtener
+         * El valor del token
+         * @return el valor del token
+         */ 
         public String getToken() {
             return this.token;
         }
 
+        /**
+         * Método para darle
+         * Un valor al token
+         * @param token - token con la cadena
+         */
         public void setToken(String token) {
             this.token = token;
         }
     }
 
-    /*
-    Constructor de la clase ArbolAnalizador
-    */
+    /**
+     * Constructor de la clase ArbolAnalizador
+     */
     public ArbolAnalizador() {
         this.raiz = null;
     }
 
+    /**
+     * Método para obtener
+     * El valor de la raíz
+     * @return el valor de la raíz
+     */
     public Nodo getRaiz() {
         return this.raiz;
     }
 
-    /*
-    @param 
-    */
+    /**
+     * Método para agregar
+     * Elementos al árbol
+     * @param entrada - cadena a agregar
+     * @param nodo - nodo donde guardamos la cadena
+     * @return nodo agregado con la cadena
+     */
     public Nodo agrega(String entrada, Nodo nodo) {
         if (this.raiz == null) {
             Nodo nodoRaiz = new Nodo(entrada);

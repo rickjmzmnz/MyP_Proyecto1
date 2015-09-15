@@ -1,21 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proyecto1;
 
+import jfx.messagebox.MessageBox;
+
 /**
- *
- * @author ricardo
+ * Clase para partir la cadena de entrada en tokens
+ * Para ser guarados en el árbol 
+ * @author Ricardo Jiménez Méndez
  */
 public class Tokenizer {
 
+    //Cadena a partir en tokens
     private String entrada;
+    //Árbol para guardar los tokens
     private ArbolAnalizador arbol;
 
     /**
-     * Constructor de la clase Tokenizer
+     * Constructor vacío de la clase Tokenizer
      */
     public Tokenizer() {
         this.entrada = "";
@@ -31,7 +32,12 @@ public class Tokenizer {
         this.entrada = entrada;
         this.arbol = new ArbolAnalizador();
     }
-
+    
+    /**
+     * Método que obtiene el árbol de tokens
+     * A partir de la cadena de entrada
+     * @return arbol - el árbol con los tokens
+     */
     public ArbolAnalizador getTree() {
         ArbolAnalizador.Nodo nodo = this.arbol.getRaiz();
         String[] cadenaPartida = this.entrada.split("");
@@ -39,6 +45,15 @@ public class Tokenizer {
         return this.arbol;
     }
         
+    /**
+     * Método auxiliar para guardar la cadena partida en tokens en el árbol
+     * De acuerdo a la gramática dada
+     * Generamos los tokens a partir de la cadena de entrada
+     * @param cadenaPartida - arreglo con la cadena de entrada
+     * @param nodo - nodo para guardar los tokens
+     * @param index - posición de los caracteres
+     * @return int - la posición de los caracteres
+     */
     private int tokenizar(String[] cadenaPartida, ArbolAnalizador.Nodo nodo,int index) {     
         for (int i = index; i < cadenaPartida.length; i++) {
             switch (cadenaPartida[i]) {
@@ -86,7 +101,7 @@ public class Tokenizer {
                         this.arbol.agrega("", nodo);
                         return tokenizar(cadenaPartida,nodo,i+3);
                     } else {
-                        //poner error.
+                        return MessageBox.show(null, "Tu función no es correcta", "Función inválida", MessageBox.ICON_ERROR | MessageBox.OK);
                     }
                 case "c" :
                     if (cadenaPartida[i + 1].equals("o") && cadenaPartida[i + 2].equals("s")) {
@@ -102,7 +117,7 @@ public class Tokenizer {
                         this.arbol.agrega("", nodo);
                         return tokenizar(cadenaPartida,nodo,i+3);
                     } else {
-                        //poner error.
+                        return MessageBox.show(null, "Tu función no es correcta", "Función inválida", MessageBox.ICON_ERROR | MessageBox.OK);
                     }
                 case "t" :
                     if (cadenaPartida[i + 1].equals("a") && cadenaPartida[i + 2].equals("n")) {
@@ -110,7 +125,7 @@ public class Tokenizer {
                         this.arbol.agrega("",nodo);    
                         return tokenizar(cadenaPartida,nodo,i+3);
                     } else {
-                        //poner error.
+                        return MessageBox.show(null, "Tu función no es correcta", "Función inválida", MessageBox.ICON_ERROR | MessageBox.OK);
                     }
                 case "+" :
                     nodo = this.arbol.agrega("+", nodo);
@@ -134,7 +149,14 @@ public class Tokenizer {
     return 0;    
     }
     
-
+    /**
+     * Método auxiliar para tokenizar
+     * Nos ayúda a reconocer a un número en la cadena
+     * @param arreglo - arreglo para guardar el número
+     * @param i - inicio del arreglo
+     * @return j+1 - índice que indíca el siguiente caracter
+     * despues del número
+     */
     private int noNumber(String[] arreglo, int i) {
         int j;
         for (j = i; j < arreglo.length; j++) {
