@@ -8,12 +8,15 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 /**
  *
@@ -22,9 +25,9 @@ import javafx.scene.paint.Color;
 public class InterfazGraficaController implements Initializable {
     
     @FXML 
-    ImageView grafica;
+    Canvas grafica;
     @FXML
-    TextField funcion;
+    TextField funcion,ancho,alto,x1,x2;
     
     
     @FXML
@@ -32,19 +35,29 @@ public class InterfazGraficaController implements Initializable {
         String entrada = funcion.getText();
         Tokenizer token = new Tokenizer(entrada);
         Evaluador eval = new Evaluador(token);
-        //INTERFAZ
+        double altura = Double.parseDouble(alto.getText());
+        double anchura = Double.parseDouble(ancho.getText());
+        double numero1 = Double.parseDouble(x1.getText());
+        double numero2 = Double.parseDouble(x2.getText());
+        double[][] arreglo = eval.eval(numero1, numero2);
+        GraphicsContext pintura = grafica.getGraphicsContext2D();
+        grafica.setHeight(altura);
+        grafica.setWidth(anchura);
+        pintura.clearRect(0, 0,anchura,altura);
+        pintura.strokeLine(0, (altura/2), anchura, (altura/2));
+        pintura.strokeLine((anchura/2), 0, (anchura/2), altura);
+        //pintura.
+        for(int i = 0;i < Evaluador.tamano-1;i++) {
+            pintura.strokeLine((anchura/2) + arreglo[i][0],
+                    (altura/2) - arreglo[i][1],
+                    (anchura/2) + arreglo[i+1][0],
+                    (altura/2) - arreglo[i+1][1]);
+        }
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*
-        String p = "(^ x 2)";
-        Tokenizer token = new Tokenizer(p);
-        Evaluador eval = new Evaluador(token);
-        double[][] arreglo = eval.eval(0,100);
-        for(int i=0;i<1000;i++) {
-            System.out.println("x = "+arreglo[i][0] +" "+"y = "+arreglo[i][1]);
-        }*/        
+             
     }    
     
     

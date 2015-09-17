@@ -9,6 +9,7 @@ import jfx.messagebox.MessageBox;
  */
 public class Evaluador {
     
+    protected static final int tamano = 10000;
     //token con los caracteres
     private Tokenizer token;
     
@@ -36,11 +37,11 @@ public class Evaluador {
      * @return el arreglo con todos los valores evaluados
      */
     public double[][] eval(double numero1,double numero2) {
-         double[][] arregloDoble = new double[1000][2];
+         double[][] arregloDoble = new double[tamano][2];
          ArbolAnalizador arbol = this.token.getTree();
          ArbolAnalizador.Nodo nodo = arbol.getRaiz(); 
-         double intervalo = (numero2 - numero1)/1000;
-         for(int i = 0;i<1000;i++) {
+         double intervalo = (numero2 - numero1)/tamano;
+         for(int i = 0;i<tamano;i++) {
              arregloDoble[i][0] = numero1;
              arregloDoble[i][1] = ayudaEval(nodo, numero1);
              numero1 += intervalo;
@@ -99,7 +100,8 @@ public class Evaluador {
                 double div1 = ayudaEval(nodo.getIzq(), numero);
                 double div2 = ayudaEval(nodo.getDer(), numero);
                 if(div2 == 0) {
-                return MessageBox.show(null, "División entre cero, (te vas a ir al infierno)", "División inválida", MessageBox.ICON_ERROR | MessageBox.OK);
+                    return (div1 / 0.00001);
+//return MessageBox.show(null, "División entre cero, (te vas a ir al infierno)", "División inválida", MessageBox.ICON_ERROR | MessageBox.OK);
                 } else {                    
                 return (div1 / div2);
                 }
