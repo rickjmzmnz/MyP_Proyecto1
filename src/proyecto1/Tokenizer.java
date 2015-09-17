@@ -101,7 +101,8 @@ public class Tokenizer {
                         this.arbol.agrega("", nodo);
                         return tokenizar(cadenaPartida,nodo,i+3);
                     } else {
-                        return MessageBox.show(null, "Tu función no es correcta", "Función inválida", MessageBox.ICON_ERROR | MessageBox.OK);
+                       MessageBox.show(null, "Tu función no es correcta", "Función inválida", MessageBox.ICON_ERROR | MessageBox.OK);
+                       break;
                     }
                 case "c" :
                     if (cadenaPartida[i + 1].equals("o") && cadenaPartida[i + 2].equals("s")) {
@@ -117,7 +118,8 @@ public class Tokenizer {
                         this.arbol.agrega("", nodo);
                         return tokenizar(cadenaPartida,nodo,i+3);
                     } else {
-                        return MessageBox.show(null, "Tu función no es correcta", "Función inválida", MessageBox.ICON_ERROR | MessageBox.OK);
+                        MessageBox.show(null, "Tu función no es correcta", "Función inválida", MessageBox.ICON_ERROR | MessageBox.OK);
+                        break;
                     }
                 case "t" :
                     if (cadenaPartida[i + 1].equals("a") && cadenaPartida[i + 2].equals("n")) {
@@ -125,7 +127,8 @@ public class Tokenizer {
                         this.arbol.agrega("",nodo);    
                         return tokenizar(cadenaPartida,nodo,i+3);
                     } else {
-                        return MessageBox.show(null, "Tu función no es correcta", "Función inválida", MessageBox.ICON_ERROR | MessageBox.OK);
+                        MessageBox.show(null, "Tu función no es correcta", "Función inválida", MessageBox.ICON_ERROR | MessageBox.OK);
+                        break;
                     }
                 case "+" :
                     nodo = this.arbol.agrega("+", nodo);
