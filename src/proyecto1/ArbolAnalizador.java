@@ -12,7 +12,7 @@ public class ArbolAnalizador {
     //Nodo raíz del árbol
     private Nodo raiz;
 
-    protected class Nodo {
+    public class Nodo {
         
         //Nodo izquierdo
         private Nodo izq;

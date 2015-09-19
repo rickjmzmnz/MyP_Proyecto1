@@ -31,9 +31,12 @@ public class InterfazGraficaController implements Initializable {
     @FXML
     TextField funcion,ancho,alto,x1,x2,y1,y2;
     @FXML
-    Button limpia;
+    Button limpia,svg;
     
-    
+    /**
+     * Método para poder gráficar la función dada
+     * param event - acción al momento de gráficar una función
+     */    
     @FXML
     public void dibuja(ActionEvent event) {
         String entrada = funcion.getText();
@@ -59,7 +62,6 @@ public class InterfazGraficaController implements Initializable {
         grafica.setWidth(anchura);
         pintura.strokeLine(0, (altura/2), anchura, (altura/2));
         pintura.strokeLine((anchura/2), 0, (anchura/2), altura);
-        //pintura.
         for(int i = 0;i < Evaluador.tamano-1;i++) {
             double difX = ((numerox2-numerox1)/2);
             double x1 = (anchura/2)+(((anchura/2)*arreglo[i][0])/difX);
@@ -68,13 +70,14 @@ public class InterfazGraficaController implements Initializable {
             double y1 = (altura/2)-(((altura/2)*arreglo[i][1])/difY);
             double y2 = (altura/2)-(((altura/2)*arreglo[i+1][1])/difY);
             pintura.strokeLine(x1,y1,x2,y2);
-            //System.out.println((anchura/2) + arreglo[i][0]+" "+
-              //      ((altura/2) - arreglo[i][1]) + " "+
-                //    (anchura/2) + arreglo[i+1][0]+" "+
-                  //  ((altura/2) - arreglo[i+1][1]));
         }
     }
-    
+ 
+    /**
+     * Método para limpiar la gráfica
+     * Y poder dibujar una nueva
+     * param e - acción al momento de apretar el botón limpiar
+     */   
     @FXML
     public void limpiar(ActionEvent e) {
         GraphicsContext pintura = grafica.getGraphicsContext2D();

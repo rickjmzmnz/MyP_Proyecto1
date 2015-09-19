@@ -101,7 +101,7 @@ public class Evaluador {
                 double div2 = ayudaEval(nodo.getDer(), numero);
                 if(div2 == 0) {
                     return (div1 / 0.00001);
-//return MessageBox.show(null, "División entre cero, (te vas a ir al infierno)", "División inválida", MessageBox.ICON_ERROR | MessageBox.OK);
+		//return MessageBox.show(null, "División entre cero, (te vas a ir al infierno)", "División inválida", MessageBox.ICON_ERROR | MessageBox.OK);
                 } else {                    
                 return (div1 / div2);
                 }
